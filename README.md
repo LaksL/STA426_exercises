@@ -2,7 +2,7 @@
 
 This is a repository for STA472 ex1.
 
-[Link to the repository of the course](https://github.com/sta426hs2023/material)
+Link to the [repository of the course](https://github.com/sta426hs2023/material)
 
 Included also a picture of a illumina sequencer:
 
