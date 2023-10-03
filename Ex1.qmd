@@ -1,0 +1,67 @@
+---
+title: "Ex1b"
+format: html
+editor: visual
+---
+
+## Exercise 1b
+
+Sample 100 values from a log-normal distribution (see the rlnorm function; you can use mu=5,sigma=0.5); using the ggplot2 package, create a histogram of the sampled data on both the linear and log scales; create also a violin plot; within your quarto document,write 1-2 sentences to describe your steps and organize the document with subsection headings; **report the mean and standard deviation of your sampled values** in line in the text.
+
+## Solution
+
+Install libraries and packages.
+
+```{r}
+library(reshape2)
+library(ggplot2)
+
+```
+
+Firstly, I set the seed to have constantly the same results for rlnorm. Then I generate the samples using the function rlnorm and the given parameters. I generate two data frames with the data (df and logdf) for easier plotting. At the end I find the min, max, mean and st.dev. of the data.
+
+```{r}
+
+set.seed(1)
+n=100
+mu=5
+sigma =0.5
+x=rlnorm(100,meanlog=mu, sdlog=sigma)
+df=data.frame(x)
+logdf =data.frame(log(x))
+mean(x)
+sd(x)
+min(x)
+max(x)
+
+```
+
+```         
+mean 172.9923
+standard deviation 80.36899
+```
+
+### Histogram
+
+Histogram of the sampled data in linear and log form using ggplot histograms.
+
+```{r}
+
+ggplot(df, aes(x)) +             
+  geom_histogram(bins=25)
+ggplot(logdf, aes(log(x))) +     
+  geom_histogram(bins = 25)
+```
+
+### Violin plot
+
+Before I can plot my violin plots, I need to reshape them. Lastly, I plot the violin plots.
+
+```{r}
+#reshaping the data
+df.m <- reshape2::melt(df, id.vars = NULL)
+df.n <- reshape2::melt(logdf, id.vars = NULL)
+#plotting
+ggplot(df.m, aes(x = variable, y = value)) + geom_violin()
+ggplot((df.n), aes(x = variable, y = value)) + geom_violin()
+```
